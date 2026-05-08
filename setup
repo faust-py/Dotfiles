@@ -1,0 +1,166 @@
+#!/usr/bin/env bash
+# Luca Arch Linux Post-Install Script
+
+# ========== Colors ==========
+Green='\033[0;32m'
+Cyan='\033[1;36m'
+Red='\033[0;31m'
+No='\033[0m'
+
+clear
+
+# ========== Function: Echo Section ==========
+section() {
+  echo -e "\n${Cyan}==> $1...${No}"
+}
+
+# ========== Check for yay ==========
+if ! command -v yay &> /dev/null; then
+  echo -e "${Red}Error: 'yay' is not installed. Install it before running this script.${No}"
+  exit 1
+fi
+
+# ========== Window Manager ==========
+section "Installing Niri WM"
+sudo pacman -Syu --noconfirm --needed \
+    niri xdg-desktop-portal xdg-desktop-portal-gtk xdg-desktop-portal-gnome dms-shell dms-shell-niri matugen wl-clipboard xwayland-satellite 
+
+# ========== Base Packages ==========
+section "Installing SYSTEM CORE"
+sudo pacman -S --needed --noconfirm \
+    cpupower man-db pacman-contrib jq rsync curl wget tmux fzf htop btop zsh fastfetch wl-clipboard grim slurp
+
+section "Installing NETWORK TOOLS"
+sudo pacman -S --needed --noconfirm \
+    sshfs inetutils dnsutils tor
+
+section "Installing FILE MANAGEMENT"
+sudo pacman -S --needed --noconfirm \
+    lsd engrampa p7zip unzip veracrypt
+
+section "Installing MEDIA"
+sudo pacman -S --needed --noconfirm \
+    vlc vlc-plugin-ffmpeg audacious obs-studio ffmpegthumbnailer tumbler
+
+section "Installing AUDIO CONTROL"
+sudo pacman -S --needed --noconfirm \
+    pamixer playerctl
+
+section "Installing GSTREAMER MEDIA STACK"
+sudo pacman -S --needed --noconfirm \
+    gstreamer gst-plugins-base gst-plugins-good gst-plugins-bad gst-plugins-ugly
+
+section "Installing DEVELOPMENT TOOLS"
+sudo pacman -S --needed --noconfirm \
+    clang python-pip qtcreator gdb
+
+section "Installing QT THEMING"
+sudo pacman -S --needed --noconfirm \
+    qt5ct qt6ct qt5-wayland qt6-wayland kvantum kvantum-qt5 qt6-tools python-pyqt6 qt5-graphicaleffects
+
+section "Installing DEVICE SUPPORT"
+sudo pacman -S --needed --noconfirm \
+    android-tools gvfs-mtp gvfs-gphoto2 mtpfs cdrtools
+
+section "Installing GUI APPLICATIONS"
+sudo pacman -S --needed --noconfirm \
+    kitty geany ghex gnome-disk-utility remmina telegram-desktop thunderbird obsidian qalculate-gtk viewnior qbittorrent gufw nwg-look rofi rofi-emoji
+
+# ========== Set Environment Variables ==========
+section "Configuring environment variables"
+ENV_FILE="/etc/environment"
+ENV_VARS="\
+XKB_DEFAULT_LAYOUT=fr,dz
+XKB_DEFAULT_VARIANT=,ar
+XKB_DEFAULT_OPTIONS=grp:alt_shift_toggle
+"
+echo "$ENV_VARS" | while read -r line; do
+  if ! grep -qxF "$line" "$ENV_FILE"; then
+    echo "$line" | sudo tee -a "$ENV_FILE" > /dev/null
+  fi
+done
+
+# ========== AUR Packages ==========
+section "Installing AUR Packages"
+yay -S --needed --noconfirm \
+	scrcpy papirus-icon-theme-git papirus-folders-git yt-dlp\
+	matcha-gtk-theme kvantum-theme-matchama bibata-cursor-theme brave-bin vscodium-bin\
+	libva-mesa-driver libva-utils cmatrix-git
+
+# Set icon color
+sudo papirus-folders -C bluegrey --theme Papirus-Dark
+
+# ========== Fonts ==========
+section "Installing Fonts"
+sudo pacman -S --needed --noconfirm \
+    noto-fonts noto-fonts-emoji noto-fonts-cjk \
+    ttf-dejavu ttf-liberation ttf-roboto ttf-roboto-mono-nerd \
+    ttf-jetbrains-mono-nerd ttf-hack woff2-font-awesome
+
+yay -S --needed --noconfirm \
+	ttf-meslo-nerd-font-powerlevel10k ttf-joypixels
+
+# Rebuild font cache once
+fc-cache -fv
+
+# ========== Firewall ==========
+section "Enabling UFW Firewall"
+sudo systemctl enable --now ufw
+
+# ========== CPUPOWER Configuration ==========
+section "Configuring CPUPOWER settings"
+sudo tee /etc/default/cpupower > /dev/null <<EOF
+# CPU Governor
+governor='schedutil'
+
+# Frequency limits (Ryzen 5 5600G tuned)
+min_freq='1.4GHz'
+max_freq='3.9GHz'
+EOF
+
+section "Enabling cpupower"
+sudo systemctl enable --now cpupower
+sudo systemctl restart cpupower
+# Apply settings immediately
+sudo cpupower frequency-set -g schedutil
+
+# === Setting the Cpu ===
+echo ">> Setting up Cpu Boost..."
+cat <<EOF | sudo tee /etc/systemd/system/disable-cpu-boost.service > /dev/null
+[Unit]
+Description=Disable CPU Boost
+After=multi-user.target
+
+[Service]
+Type=oneshot
+ExecStart=/bin/bash -c '[ -f /sys/devices/system/cpu/cpufreq/boost ] && echo 0 > /sys/devices/system/cpu/cpufreq/boost'
+RemainAfterExit=true
+
+[Install]
+WantedBy=multi-user.target
+EOF
+
+sudo systemctl daemon-reexec
+sudo systemctl enable --now disable-cpu-boost.service
+echo "✅ CPU Boost is disabled and will stay disabled after reboot."
+
+# ========== Zsh ==========
+section "Setting Zsh as Default"
+chsh -s /bin/zsh
+mkdir -p $HOME/Pictures/Screenshots
+
+# ========== Greeter Setup ==========
+section "Installing and Enabling Login Manager :"
+# Install DankGreeter (dms-greeter) :
+yay -S --needed --noconfirm greetd-dms-greeter-git
+
+# Enable DankGreeter :
+dms greeter enable
+dms greeter sync
+sudo systemctl enable greetd
+
+# Setting Keybord :
+sudo localectl set-x11-keymap fr,dz pc101 "" grp:alt_shift_toggle
+# ========== Done ==========
+
+echo -e "${Green}✅ All done! Please reboot your system to apply changes.${No}"
