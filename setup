@@ -23,12 +23,12 @@ fi
 # ========== Window Manager ==========
 section "Installing Niri WM"
 sudo pacman -Syu --noconfirm --needed \
-    sudo pacman -Syu niri xwayland-satellite xdg-desktop-portal-gnome xdg-desktop-portal-gtk alacritty dms-shell-niri matugen cava qt6-multimedia-ffmpeg
+    niri xdg-desktop-portal xdg-desktop-portal-gtk xdg-desktop-portal-gnome dms-shell dms-shell-niri matugen cava qt6-multimedia-ffmpeg xwayland-satellite 
 
 # ========== Base Packages ==========
 section "Installing SYSTEM CORE"
 sudo pacman -S --needed --noconfirm \
-    cpupower man-db pacman-contrib jq rsync curl wget tmux fzf htop btop zsh fastfetch wl-clipboard grim slurp
+    cpupower man-db pacman-contrib jq rsync curl wget tmux fzf htop btop zsh fastfetch grim slurp
 
 section "Installing NETWORK TOOLS"
 sudo pacman -S --needed --noconfirm \
@@ -151,6 +151,9 @@ mkdir -p $HOME/Pictures/Screenshots
 
 # ========== Greeter Setup ==========
 section "Installing and Enabling Login Manager :"
+# Install DankGreeter (dms-greeter) :
+yay -S --needed --noconfirm greetd-dms-greeter-git
+
 # Enable DankGreeter :
 dms greeter enable
 dms greeter sync
