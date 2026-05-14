@@ -23,7 +23,7 @@ fi
 # ========== Window Manager ==========
 section "Installing Niri WM"
 sudo pacman -Syu --noconfirm --needed \
-    niri xdg-desktop-portal xdg-desktop-portal-gtk xdg-desktop-portal-gnome dms-shell dms-shell-niri matugen cava qt6-multimedia-ffmpeg xwayland-satellite 
+    niri xdg-desktop-portal xdg-desktop-portal-gtk xdg-desktop-portal-gnome dms-shell dms-shell-niri matugen cava qt6-multimedia-ffmpeg xwayland-satellite xorg-xhost
 
 # ========== Base Packages ==========
 section "Installing SYSTEM CORE"
@@ -161,6 +161,10 @@ sudo systemctl enable greetd
 
 # Setting Keybord :
 sudo localectl set-x11-keymap fr,dz pc101 "" grp:alt_shift_toggle
+
+# Setting Xhost :
+xhost +si:localuser:root 
+
 # ========== Done ==========
 
 echo -e "${Green}✅ All done! Please reboot your system to apply changes.${No}"
