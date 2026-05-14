@@ -36,7 +36,7 @@ sudo pacman -S --needed --noconfirm \
 
 section "Installing FILE MANAGEMENT"
 sudo pacman -S --needed --noconfirm \
-    lsd engrampa p7zip unzip veracrypt
+    thunar thunar-archive-plugin lsd engrampa p7zip unzip veracrypt
 
 section "Installing MEDIA"
 sudo pacman -S --needed --noconfirm \
@@ -151,9 +151,6 @@ mkdir -p $HOME/Pictures/Screenshots
 
 # ========== Greeter Setup ==========
 section "Installing and Enabling Login Manager :"
-# Install DankGreeter (dms-greeter) :
-yay -S --needed --noconfirm greetd-dms-greeter-git
-
 # Enable DankGreeter :
 dms greeter enable
 dms greeter sync
