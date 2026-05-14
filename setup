@@ -23,7 +23,7 @@ fi
 # ========== Window Manager ==========
 section "Installing Niri WM"
 sudo pacman -Syu --noconfirm --needed \
-    niri xdg-desktop-portal xdg-desktop-portal-gtk xdg-desktop-portal-gnome dms-shell dms-shell-niri matugen wl-clipboard xwayland-satellite 
+    sudo pacman -Syu niri xwayland-satellite xdg-desktop-portal-gnome xdg-desktop-portal-gtk alacritty dms-shell-niri matugen cava qt6-multimedia-ffmpeg
 
 # ========== Base Packages ==========
 section "Installing SYSTEM CORE"
