@@ -40,7 +40,7 @@ sudo pacman -S --needed --noconfirm \
 
 section "Installing MEDIA"
 sudo pacman -S --needed --noconfirm \
-    vlc vlc-plugin-ffmpeg audacious obs-studio ffmpegthumbnailer tumbler
+   pavucontrol vlc vlc-plugin-ffmpeg audacious obs-studio ffmpegthumbnailer tumbler
 
 section "Installing AUDIO CONTROL"
 sudo pacman -S --needed --noconfirm \
@@ -64,7 +64,7 @@ sudo pacman -S --needed --noconfirm \
 
 section "Installing GUI APPLICATIONS"
 sudo pacman -S --needed --noconfirm \
-    kitty geany ghex gnome-disk-utility remmina telegram-desktop thunderbird obsidian qalculate-gtk viewnior qbittorrent gufw nwg-look rofi rofi-emoji
+    kitty geany ghex gnome-disk-utility remmina telegram-desktop thunderbird obsidian qalculate-gtk viewnior qbittorrent gufw nwg-look rofi
 
 # ========== Set Environment Variables ==========
 section "Configuring environment variables"
@@ -164,6 +164,12 @@ sudo localectl set-x11-keymap fr,dz pc101 "" grp:alt_shift_toggle
 
 # Setting Xhost :
 xhost +si:localuser:root 
+
+# === User Dotfiles ===
+echo ">> Copying user dotfiles..."
+cp -r Home/.local Home/.zprofile Home/.vimrc Home/.zshrc Home/.bashrc $HOME/
+mkdir -p $HOME/.config
+cp -r Home/.config/* $HOME/.config/
 
 # ========== Done ==========
 

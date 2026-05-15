@@ -1,0 +1,76 @@
+prefer-no-csd
+screenshot-path null
+
+environment {
+    WLR_EGL_NO_MODIFIERS "1"
+
+    GDK_SCALE "1"
+    GDK_BACKEND "wayland"
+    GDK_BACKEND "x11"
+    SDL_VIDEODRIVER "wayland"
+    CLUTTER_BACKEND "wayland"
+
+    XDG_CURRENT_DESKTOP "niri"
+    XDG_SESSION_DESKTOP "niri"
+    XDG_SESSION_TYPE "wayland"
+
+    ELECTRON_OZONE_PLATFORM_HINT "wayland"
+
+    QT_QPA_PLATFORM "wayland"
+    QT_QPA_PLATFORMTHEME "gtk3"
+    QT_WAYLAND_DISABLE_WINDOWDECORATION "1"
+
+    MOZ_ENABLE_WAYLAND "1"
+
+    XCURSOR_THEME "Bibata-Modern-Classic"
+    XCURSOR_SIZE "24"
+}
+gestures {
+    dnd-edge-view-scroll {
+        trigger-width 30
+        delay-ms 100
+        max-speed 1500
+    }
+
+    dnd-edge-workspace-switch {
+        trigger-height 50
+        delay-ms 100
+        max-speed 1500
+    }
+
+    hot-corners {
+        off
+        // top-left
+        // top-right
+        // bottom-left
+        // bottom-right
+    }
+}
+
+cursor {
+    xcursor-theme "Bibata-Modern-Classic"
+    xcursor-size 24
+    hide-when-typing
+}
+
+debug {
+	// Allows notification actions and window activation from Noctalia.
+	honor-xdg-activation-with-invalid-serial
+}
+
+hotkey-overlay {
+   skip-at-startup
+}
+
+xwayland-satellite {
+    // off
+    path "xwayland-satellite"
+}
+
+blur {
+    // off
+    passes 3
+    offset 3
+    noise 0.02
+    saturation 2
+}

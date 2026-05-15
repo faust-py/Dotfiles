@@ -1,0 +1,15 @@
+// This config is in the KDL format: https://kdl.dev
+include "./configurations/autostart.kdl"
+include "./configurations/display.kdl"
+include "./configurations/input.kdl"
+include "./configurations/keybinds.kdl"
+include "./configurations/animation.kdl"
+include "./configurations/layout.kdl"
+include "./configurations/rules.kdl"
+include "./configurations/misc.kdl"
+
+include "dms/windowrules.kdl"
+include "dms/cursor.kdl"
+
+include "dms/outputs.kdl"
+include "dms/binds.kdl"
