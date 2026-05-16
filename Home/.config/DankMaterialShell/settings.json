@@ -1,7 +1,7 @@
 {
   "currentThemeName": "custom",
   "currentThemeCategory": "registry",
-  "customThemeFile": "/home/faust/.config/DankMaterialShell/themes/Andromeda/theme.json",
+  "customThemeFile": "/home/faust/.config/DankMaterialShell/themes/Kripton/theme.json",
   "registryThemeVariants": {},
   "matugenScheme": "scheme-tonal-spot",
   "runUserMatugenTemplates": true,
@@ -139,7 +139,7 @@
   "dwlShowAllTags": false,
   "workspaceColorMode": "default",
   "workspaceOccupiedColorMode": "none",
-  "workspaceUnfocusedColorMode": "default",
+  "workspaceUnfocusedColorMode": "s",
   "workspaceUrgentColorMode": "default",
   "workspaceFocusedBorderEnabled": false,
   "workspaceFocusedBorderColor": "primary",
@@ -220,7 +220,7 @@
   "dankLauncherV2BorderColor": "primary",
   "dankLauncherV2ShowFooter": true,
   "dankLauncherV2UnloadOnClose": false,
-  "useAutoLocation": false,
+  "useAutoLocation": true,
   "weatherEnabled": true,
   "networkPreference": "auto",
   "iconTheme": "System Default",
@@ -433,7 +433,11 @@
       "leftWidgets": [
         "launcherButton",
         "workspaceSwitcher",
-        "focusedWindow"
+        {
+          "id": "focusedWindow",
+          "enabled": true,
+          "focusedWindowCompactMode": false
+        }
       ],
       "centerWidgets": [
         {
