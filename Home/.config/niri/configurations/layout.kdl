@@ -17,8 +17,8 @@ layout {
 	focus-ring {
 			width 2
 			// Color of the ring on the active monitor.
-			active-color "#90cef4"
-			inactive-color "#171a1f"
+			active-color "#9bbfbf"
+			inactive-color "#15171c"
 	}
 
 	// You can also add a border. It's similar to the focus ring, but always visible.
