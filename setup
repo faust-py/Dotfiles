@@ -40,7 +40,7 @@ sudo pacman -S --needed --noconfirm \
 
 section "Installing MEDIA"
 sudo pacman -S --needed --noconfirm \
-   pavucontrol vlc vlc-plugin-ffmpeg audacious obs-studio ffmpegthumbnailer tumbler
+   pavucontrol vlc vlc-plugin-ffmpeg audacious obs-studio luajit ffmpegthumbnailer tumbler
 
 section "Installing AUDIO CONTROL"
 sudo pacman -S --needed --noconfirm \
