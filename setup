@@ -170,6 +170,7 @@ echo ">> Copying user dotfiles..."
 cp -r Home/.local Home/.zprofile Home/.vimrc Home/.zshrc Home/.bashrc $HOME/
 mkdir -p $HOME/.config
 cp -r Home/.config/* $HOME/.config/
+update-desktop-database $HOME/.local/share/applications
 
 # ========== Done ==========
 
