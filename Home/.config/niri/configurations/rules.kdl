@@ -1,16 +1,7 @@
 // Window rules let you adjust behavior for individual windows.
 window-rule {
-    match title="VirtualBox"
-    open-fullscreen true
-}
-
-window-rule {
+	match app-id="^brave-browser$"
     match app-id="^Vmware$"
-    open-maximized-to-edges true
-}
-
-window-rule {
-    match app-id="^brave-browser$"
     open-maximized-to-edges true
 }
 
@@ -40,18 +31,15 @@ layer-rule {
 }
 
 window-rule {
-    match is-floating=true
-
+    opacity 1.0
     background-effect {
-        xray false
+        blur true
+        xray true
     }
 }
 
-layer-rule {
-    match layer="top"
-    match layer="overlay"
-
-    background-effect {
-        xray false
-    }
+blur {
+    passes 3
+    offset 0.8
+    saturation 0.8
 }
