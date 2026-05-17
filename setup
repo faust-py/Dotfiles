@@ -28,7 +28,7 @@ sudo pacman -Syu --noconfirm --needed \
 # ========== Base Packages ==========
 section "Installing SYSTEM CORE"
 sudo pacman -S --needed --noconfirm \
-    cpupower man-db pacman-contrib jq rsync curl wget tmux fzf htop btop zsh fastfetch grim slurp
+    cpupower man-db pacman-contrib jq rsync curl wget tmux fzf htop btop zsh fastfetch grim slurp wtype wl-clipboard
 
 section "Installing NETWORK TOOLS"
 sudo pacman -S --needed --noconfirm \
@@ -64,7 +64,7 @@ sudo pacman -S --needed --noconfirm \
 
 section "Installing GUI APPLICATIONS"
 sudo pacman -S --needed --noconfirm \
-    kitty geany ghex gnome-disk-utility remmina telegram-desktop thunderbird obsidian qalculate-gtk viewnior qbittorrent gufw nwg-look rofi
+    kitty geany ghex gnome-disk-utility remmina telegram-desktop thunderbird obsidian qalculate-gtk viewnior qbittorrent gufw nwg-look rofi rofi-emoji
 
 # ========== Set Environment Variables ==========
 section "Configuring environment variables"
