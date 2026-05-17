@@ -1,5 +1,10 @@
 // Window rules let you adjust behavior for individual windows.
 window-rule {
+    match title="VirtualBox"
+    open-fullscreen true
+}
+
+window-rule {
 	match app-id="^brave-browser$"
     match app-id="^Vmware$"
     open-maximized-to-edges true
@@ -29,6 +34,7 @@ layer-rule {
     geometry-corner-radius 12
     clip-to-geometry true
 }
+
 
 window-rule {
     opacity 1.0

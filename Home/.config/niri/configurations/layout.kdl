@@ -15,7 +15,7 @@ layout {
 
 	// You can change how the focus ring looks.
 	focus-ring {
-			width 2
+			width 1
 			// Color of the ring on the active monitor.
 			active-color "#9bbfbf"
 			inactive-color "#15171c"
